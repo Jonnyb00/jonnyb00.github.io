@@ -9,6 +9,8 @@ if (currentHour >= 5 && currentHour < 12) {
     greeting = 'Good Afternoon';
 } else if (currentHour >= 17 && currentHour < 21) {
     greeting = 'Good Evening';
+} else if (currentHour >= 0 && currentHour < 4) {
+    greeting = 'Hello, Degenerate';
 } else {
     greeting = 'Hello, Night Owl';
 }
