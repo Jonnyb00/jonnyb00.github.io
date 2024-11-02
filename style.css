@@ -1,0 +1,119 @@
+/* Reset and Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    color: #333;
+    scroll-behavior: smooth;
+    background-color: #f0f2f5;
+}
+
+/* Navigation Bar */
+nav {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 1em;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 1em;
+}
+
+nav ul li a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #0073e6;
+}
+
+/* Full-Width Image Section */
+.full-width-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('C:/Users/Chees/documents/Wittierlabs/image1.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    color: white;
+    text-align: center;
+}
+
+.content-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2em;
+    border-radius: 8px;
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+}
+
+p {
+    font-size: 1.2em;
+}
+
+/* Parallax Image Section */
+.parallax-image {
+    height: 60vh;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Content Section */
+.content-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5em 2em;
+    background-color: white;
+}
+
+.text-container {
+    max-width: 800px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+    color: #333;
+}
+
+.text-container p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #555;
+}
+
+/* Link Styling */
+a {
+    color: #0073e6;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #005bb5;
+}
