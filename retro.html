@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Page</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #e0e0e0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #ff0080;
+            text-shadow: 2px 2px #00ff00;
+        }
+
+        h2 {
+            color: #0000ff;
+            font-size: 24px;
+            text-decoration: underline;
+        }
+
+        p {
+            font-size: 16px;
+            margin: 15px 0;
+        }
+
+        .retro-border {
+            border: 5px dashed #ffcc00;
+            padding: 20px;
+            background-color: #fff;
+            margin: 20px auto;
+            width: 80%;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        a {
+            color: #ff0000;
+            text-decoration: blink; /* Use with caution! */
+        }
+
+        img {
+            width: 80%;
+            max-width: 400px;
+            margin: 20px 0;
+            border: 5px solid #ff00ff;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Blink text for that 2000s effect */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .blink {
+            animation: blink 1s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="retro-border">
+        <h1>Welcome to the Retro Zone!</h1>
+        <h2>Take a Trip Back to the 2000s</h2>
+        <p>Check out my favorite memories, games, and everything that made my childhood awesome!</p>
+        <img src="retro-image.jpg" alt="A fun retro image" />
+        <p class="blink">Click <a href="index.html">here</a> to return to the future!</p>
+    </div>
+</body>
+</html>
