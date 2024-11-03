@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sour Sixteen Birthday Party RSVP</title>
+    <link rel="stylesheet" href="Early.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation and other sections -->
+
+    <!-- RSVP Form Section -->
+    <section id="rsvp">
+        <h2>RSVP</h2>
+        <p>Please fill out the form below to RSVP for my Sour Sixteen party:</p>
+        
+        <!-- Form starts here -->
+        <form action="https://formspree.io/f/xwpklyaw" method="POST" id="rsvpForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="guests">Number of Guests:</label>
+            <input type="number" id="guests" name="guests" min="1" max="5" required>
+
+            <label for="message">Message (optional):</label>
+            <textarea id="message" name="message" rows="4"></textarea>
+
+            <button type="submit" class="rsvp-btn">Submit RSVP</button>
+        </form>
+        
+        <!-- Confirmation message to appear after submission -->
+        <p id="confirmationMessage" style="display: none; color: green;">Thank you for your RSVP! We look forward to seeing you there!</p>
+    </section>
+
+    <script>
+        // Script to show a confirmation message after successful submission
+        document.getElementById("rsvpForm").onsubmit = function() {
+            document.getElementById("confirmationMessage").style.display = "block";
+            document.getElementById("rsvpForm").style.display = "none";
+            return true; // Allow form to submit
+        };
+    </script>
+</body>
+</html>
