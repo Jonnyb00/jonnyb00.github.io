@@ -1,0 +1,65 @@
+/* General Body Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fff8dc;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styling */
+header {
+    background-color: #ffdd57;
+    padding: 20px;
+}
+
+header h1 {
+    font-size: 2.5em;
+    color: #3b3b3b;
+}
+
+/* Countdown Section Styling */
+#countdown h2 {
+    color: #ff6347;
+}
+
+#timer {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 3em;
+    color: #ff4500;
+}
+
+/* Section Styling */
+section {
+    padding: 20px;
+    margin: 10px 0;
+}
+
+/* RSVP Button Styling */
+.rsvp-btn {
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #4CAF50, #81C784);
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.rsvp-btn:hover:not([disabled]) {
+    transform: scale(1.05);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.rsvp-btn:disabled {
+    cursor: not-allowed;
+    background-color: #888;
+}
+
+/* Section Heading Styling */
+#countdown h2, #details h2, #rsvp h2 {
+    color: #ff6347;
+}
