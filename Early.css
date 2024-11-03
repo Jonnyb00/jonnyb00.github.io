@@ -1,0 +1,120 @@
+/* General Body Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fff8dc;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation Bar Styling */
+nav {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 1em;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 1em;
+}
+
+nav ul li a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #0073e6;
+}
+
+/* Add padding to offset content below the fixed navigation */
+body {
+    padding-top: 70px; /* Adjust based on nav height */
+}
+
+/* Header Styling */
+header {
+    background-color: #ffdd57;
+    padding: 20px;
+}
+
+header h1 {
+    font-size: 2.5em;
+    color: #3b3b3b;
+}
+
+/* Countdown Section Styling */
+#countdown h2 {
+    color: #ff6347;
+}
+
+#timer {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 3em;
+    color: #ff4500;
+}
+
+/* Section Styling */
+section {
+    padding: 20px;
+    margin: 10px 0;
+}
+
+/* RSVP Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+input[type="number"] {
+    width: 50px;
+}
+
+button.rsvp-btn {
+    margin-top: 15px;
+    background: #4CAF50;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button.rsvp-btn:hover {
+    background: #45a049;
+}
