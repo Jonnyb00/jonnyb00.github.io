@@ -1,60 +1,689 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flora</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ultimate Student Dashboard</title>
+<style>
+  /* Reset & basic */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0; padding: 0;
+    background: #f0f3f7;
+    color: #333;
+  }
+  header {
+    background: #4a90e2;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+  }
+  main {
+    max-width: 1200px;
+    margin: 1rem auto;
+    padding: 0 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  section {
+    background: white;
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 7px rgb(0 0 0 / 0.1);
+  }
+  h2 {
+    margin-top: 0;
+    font-weight: 600;
+    border-bottom: 2px solid #4a90e2;
+    padding-bottom: 0.3rem;
+  }
+
+  /* Search Bar */
+  #search-bar {
+    display: flex;
+    gap: 0.5rem;
+  }
+  #search-input {
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    border: 2px solid #4a90e2;
+    border-radius: 5px;
+  }
+  #search-type {
+    padding: 0.5rem;
+    border: 2px solid #4a90e2;
+    border-radius: 5px;
+    background: white;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  #search-button {
+    background: #4a90e2;
+    border: none;
+    color: white;
+    font-weight: 700;
+    padding: 0 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  #search-button:hover {
+    background: #357ABD;
+  }
+
+  /* Notes */
+  #notes-textarea {
+    width: 100%;
+    height: 180px;
+    font-size: 1rem;
+    padding: 0.5rem;
+    border: 1.8px solid #4a90e2;
+    border-radius: 6px;
+    resize: vertical;
+    font-family: monospace;
+  }
+
+  /* To-Do List */
+  #todo-list {
+    list-style: none;
+    padding-left: 0;
+    max-height: 220px;
+    overflow-y: auto;
+    margin: 0.5rem 0 1rem 0;
+  }
+  #todo-list li {
+    display: flex;
+    align-items: center;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid #eee;
+  }
+  #todo-list li:last-child {
+    border-bottom: none;
+  }
+  #todo-list input[type="checkbox"] {
+    margin-right: 0.5rem;
+    transform: scale(1.2);
+    cursor: pointer;
+  }
+  #todo-list label {
+    flex: 1;
+    cursor: pointer;
+    user-select: none;
+  }
+  #todo-list button {
+    border: none;
+    background: transparent;
+    color: #d9534f;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  #todo-input {
+    width: calc(100% - 75px);
+    padding: 0.4rem 0.6rem;
+    font-size: 1rem;
+    border: 2px solid #4a90e2;
+    border-radius: 5px 0 0 5px;
+  }
+  #add-todo-btn {
+    width: 75px;
+    border: none;
+    background: #4a90e2;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+    transition: background 0.3s;
+  }
+  #add-todo-btn:hover {
+    background: #357ABD;
+  }
+  #todo-controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  #clear-completed-btn {
+    background: #d9534f;
+    color: white;
+    border: none;
+    padding: 0.3rem 0.6rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  #clear-completed-btn:hover {
+    background: #b52b27;
+  }
+
+  /* Calendar */
+  #calendar {
+    width: 100%;
+    border-collapse: collapse;
+    user-select: none;
+    
+  }
+ #calendar {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* 👈 THIS ensures equal column widths */
+}
+
+#calendar th, #calendar td {
+  width: calc(100% / 7); /* 👈 7 equal columns */
+  text-align: center;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  vertical-align: top;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+
+  #calendar td.today {
+    background: #ffe680;
+    font-weight: 700;
+    border: 2px solid #f7b500;
+  }
+  #calendar td:hover:not(.empty) {
+    background: #d0e4ff;
+  }
+  #calendar td.empty {
+    background: #f9f9f9;
+    cursor: default;
+  }
+
+  /* Pomodoro Timer */
+  #timer-display {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 1rem 0;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  #timer-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  #timer-controls button {
+    background: #4a90e2;
+    border: none;
+    color: white;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  #timer-controls button:hover {
+    background: #357ABD;
+  }
+  #footer {
+    text-align: center;
+    margin: 2rem 0 1rem 0;
+    color: #777;
+    font-size: 0.9rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    main {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="newyork.html">New York Trip</a></li>
-            <li><a href="birthday.html">Sour Sixteen</a></li>
-        </ul>
-    </nav>
 
-    <!-- Full-Width Image with Intro Text -->
-    <section id="home" class="full-width-image">
-        <div class="content-overlay">
-            <h1>Welcome! I'm [Flora]</h1>
-            <p>Discover my journey as a developer and food enthusiast.</p>
-        </div>
-    </section>
-
-<!-- About Section with Clean Layout -->
-<section id="about" class="content-section">
-    <div class="text-container">
-        <h2>About Me</h2>
-        <p>I am a 15-year-old male from the U.S. with a love for gaming, especially in Roblox. I’m also a sushi enthusiast with a curious mind about life’s biggest questions. I balance school, family time, and my gaming passions, and can’t wait to share more with you here. If you <a href="retro.html" style="color: inherit; text-decoration: none; font-weight: bold;">wait</a> a moment, I might just surprise you!</p>
+<header>Ultimate Student Dashboard</header>
+<main>
+  <section id="search-section">
+    <h2>Quick Search</h2>
+    <div id="search-bar">
+      <input id="search-input" type="text" placeholder="Search Google or Wikipedia..." />
+      <select id="search-type" title="Choose search engine">
+        <option value="google" selected>Google</option>
+        <option value="wikipedia">Wikipedia</option>
+      </select>
+      <button id="search-button">Go</button>
     </div>
-</section>
+  </section>
+
+  <section id="notes-section">
+    <h2>Notes</h2>
+    <textarea id="notes-textarea" placeholder="Write your notes here..."></textarea>
+  </section>
+
+  <section id="todo-section">
+    <h2>To-Do List</h2>
+    <div id="todo-controls">
+      <input id="todo-input" type="text" placeholder="Add a new task..." />
+      <button id="add-todo-btn">Add</button>
+    </div>
+    <ul id="todo-list"></ul>
+    <button id="clear-completed-btn">Clear Completed</button>
+  </section>
+
+  <section id="calendar-section">
+    <h2>Calendar</h2>
+    <table id="calendar" aria-label="Calendar"></table>
+<div id="calendar-controls" style="text-align:center; margin-top: 0.5rem;">
+  <button id="prev-month-btn">&larr; Prev</button>
+  <span id="calendar-month-label" style="margin: 0 1rem; font-weight: bold;"></span>
+  <button id="next-month-btn">Next &rarr;</button>
+</div>
+
+  </section>
+
+  <section id="events-import-section">
+    <h2>Import Events</h2>
+    <textarea id="events-import-textarea" placeholder='Paste events JSON lines here, one per line, e.g.
+{"date":"2025-07-01","text":"Math exam"}
+{"date":"2025-07-04","text":"Project due"}' style="width: 100%; height: 120px; font-family: monospace; margin-bottom: 0.5rem;"></textarea>
+    <button id="import-events-btn" style="background: #4a90e2; color: white; padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer;">Import Events</button>
+  </section>
+
+  <section id="timer-section">
+    <h2>Focus Timer (Pomodoro)</h2>
+    <div id="timer-display">25:00</div>
+    <div id="timer-controls">
+      <button id="start-timer-btn">Start</button>
+      <button id="pause-timer-btn" disabled>Pause</button>
+      <button id="reset-timer-btn">Reset</button>
+    </div>
+  </section>
+</main>
+<footer id="footer">Made with love &lt;3</footer>
+
+<script>
+  
+  const now = new Date();
+  // ======= Search functionality =======
+  const searchInput = document.getElementById('search-input');
+  const searchType = document.getElementById('search-type');
+  const searchButton = document.getElementById('search-button');
+
+  searchButton.addEventListener('click', () => {
+    const query = searchInput.value.trim();
+    if (!query) return alert('Please enter a search term.');
+    if (searchType.value === 'google') {
+      window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank');
+    } else if (searchType.value === 'wikipedia') {
+      window.open(`https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(query)}`, '_blank');
+    }
+  });
+
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') searchButton.click();
+  });
+
+  // ======= Notes functionality =======
+  const notesTextarea = document.getElementById('notes-textarea');
+  const NOTES_KEY = 'ultimateStudentNotes';
+
+  // Load notes
+  notesTextarea.value = localStorage.getItem(NOTES_KEY) || '';
+
+  // Save notes on input
+  notesTextarea.addEventListener('input', () => {
+    localStorage.setItem(NOTES_KEY, notesTextarea.value);
+  });
+
+  // ======= To-Do List functionality =======
+  const todoInput = document.getElementById('todo-input');
+  const addTodoBtn = document.getElementById('add-todo-btn');
+  const todoList = document.getElementById('todo-list');
+  const clearCompletedBtn = document.getElementById('clear-completed-btn');
+  const TODO_KEY = 'ultimateStudentTodos';
+
+  let todos = JSON.parse(localStorage.getItem(TODO_KEY)) || [];
+
+  function saveTodos() {
+    localStorage.setItem(TODO_KEY, JSON.stringify(todos));
+  }
+
+  function renderTodos() {
+    todoList.innerHTML = '';
+    todos.forEach((todo, idx) => {
+      const li = document.createElement('li');
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.checked = todo.done;
+      checkbox.id = `todo-${idx}`;
+      checkbox.addEventListener('change', () => {
+        todos[idx].done = checkbox.checked;
+        saveTodos();
+        renderTodos();
+      });
+      const label = document.createElement('label');
+      label.htmlFor = checkbox.id;
+      label.textContent = todo.text;
+      if (todo.done) label.style.textDecoration = 'line-through';
+
+      const delBtn = document.createElement('button');
+      delBtn.textContent = '✕';
+      delBtn.title = 'Delete task';
+      delBtn.addEventListener('click', () => {
+        todos.splice(idx, 1);
+        saveTodos();
+        renderTodos();
+      });
+
+      li.appendChild(checkbox);
+      li.appendChild(label);
+      li.appendChild(delBtn);
+      todoList.appendChild(li);
+    });
+  }
+
+  addTodoBtn.addEventListener('click', () => {
+    const text = todoInput.value.trim();
+    if (!text) return;
+    todos.push({ text, done: false });
+    todoInput.value = '';
+    saveTodos();
+    renderTodos();
+  });
+
+  todoInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') addTodoBtn.click();
+  });
+
+  clearCompletedBtn.addEventListener('click', () => {
+    todos = todos.filter(todo => !todo.done);
+    saveTodos();
+    renderTodos();
+  });
+
+  renderTodos();
+
+  // ======= Calendar functionality =======
+  const calendar = document.getElementById('calendar');
+
+  const EVENTS_KEY = 'ultimateStudentEvents';
+  let events = JSON.parse(localStorage.getItem(EVENTS_KEY)) || [];
+  
+
+  // Save events to localStorage
+  function saveEvents() {
+    localStorage.setItem(EVENTS_KEY, JSON.stringify(events));
+  }
+
+  // Get events for a specific date (YYYY-MM-DD)
+  function getEventsForDate(dateStr) {
+    return events.filter(e => e.date === dateStr);
+  }
+
+  // Add event for a date
+  function addEvent(dateStr, text) {
+    events.push({ date: dateStr, text });
+    saveEvents();
+  }
+
+  // Remove event for a date by index
+  function removeEvent(dateStr, idx) {
+    const dateEvents = getEventsForDate(dateStr);
+    const eventToRemove = dateEvents[idx];
+    const eventIndex = events.indexOf(eventToRemove);
+    if (eventIndex !== -1) {
+      events.splice(eventIndex, 1);
+      saveEvents();
+    }
+  }
+
+  // Render calendar with events and click handlers
+  function renderCalendar(year, month) {
+    calendar.innerHTML = '';
+
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+
+    const firstWeekday = firstDay.getDay();
+    const daysInMonth = lastDay.getDate();
+
+    const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    weekdays.forEach(day => {
+      const th = document.createElement('th');
+      th.textContent = day;
+      headerRow.appendChild(th);
+    });
+    thead.appendChild(headerRow);
+    calendar.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    let dayCount = 1;
+    for (let week = 0; week < 6; week++) {
+      const tr = document.createElement('tr');
+      for (let d = 0; d < 7; d++) {
+        const td = document.createElement('td');
+        if (week === 0 && d < firstWeekday) {
+          td.classList.add('empty');
+          td.textContent = '';
+        } else if (dayCount > daysInMonth) {
+          td.classList.add('empty');
+          td.textContent = '';
+        } else {
+          td.textContent = dayCount;
+          const today = new Date();
+          if (
+            dayCount === today.getDate() &&
+            month === today.getMonth() &&
+            year === today.getFullYear()
+          ) {
+            td.classList.add('today');
+          }
+
+          // Format date string YYYY-MM-DD
+          const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(dayCount).padStart(2, '0')}`;
+
+          // Show events for this date
+          const dayEvents = getEventsForDate(dateStr);
+          if (dayEvents.length > 0) {
+            const eventsDiv = document.createElement('div');
+            eventsDiv.style.marginTop = '4px';
+            eventsDiv.style.fontSize = '0.7rem';
+            eventsDiv.style.color = '#4a90e2';
+            eventsDiv.style.textAlign = 'left';
+            dayEvents.forEach(ev => {
+              const evSpan = document.createElement('div');
+              evSpan.textContent = `• ${ev.text}`;
+              eventsDiv.appendChild(evSpan);
+            });
+            td.appendChild(eventsDiv);
+          }
+
+          // Add click listener to add/remove events
+          td.style.cursor = 'pointer';
+          td.addEventListener('click', () => {
+            handleDateClick(dateStr);
+          });
+
+          dayCount++;
+        }
+        tr.appendChild(td);
+      }
+      tbody.appendChild(tr);
+      if (dayCount > daysInMonth) break;
+    }
+    calendar.appendChild(tbody);
+  }
+
+  // Handle clicks on calendar dates to add/remove events
+  function handleDateClick(dateStr) {
+    const dateEvents = getEventsForDate(dateStr);
+    let message = `Events on ${dateStr}:\n`;
+    if (dateEvents.length === 0) {
+      message += "(No events)";
+    } else {
+      dateEvents.forEach((ev, i) => {
+        message += `${i + 1}. ${ev.text}\n`;
+      });
+    }
+    message += "\nEnter a new event to add, or enter 'remove N' to delete event number N, or leave empty to cancel.";
+
+    const input = prompt(message);
+    if (!input) return; // Cancel
+
+    const trimmed = input.trim();
+    if (trimmed.toLowerCase().startsWith('remove ')) {
+      const numStr = trimmed.substring(7).trim();
+      const num = parseInt(numStr, 10);
+      if (!isNaN(num) && num > 0 && num <= dateEvents.length) {
+        removeEvent(dateStr, num - 1);
+        alert(`Removed event #${num} on ${dateStr}.`);
+        renderCalendar(now.getFullYear(), now.getMonth());
+      } else {
+        alert("Invalid event number to remove.");
+      }
+    } else {
+      // Add new event
+      addEvent(dateStr, trimmed);
+      alert(`Added event on ${dateStr}: "${trimmed}"`);
+      renderCalendar(now.getFullYear(), now.getMonth());
+    }
+  }
+  let currentMonth = now.getMonth();
+let currentYear = now.getFullYear();
+
+function updateCalendarHeader() {
+  const label = document.getElementById('calendar-month-label');
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+  label.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+}
+
+document.getElementById('prev-month-btn').addEventListener('click', () => {
+  currentMonth--;
+  if (currentMonth < 0) {
+    currentMonth = 11;
+    currentYear--;
+  }
+  renderCalendar(currentYear, currentMonth);
+  updateCalendarHeader();
+});
+
+document.getElementById('next-month-btn').addEventListener('click', () => {
+  currentMonth++;
+  if (currentMonth > 11) {
+    currentMonth = 0;
+    currentYear++;
+  }
+  renderCalendar(currentYear, currentMonth);
+  updateCalendarHeader();
+});
+
+// On load:
+renderCalendar(currentYear, currentMonth);
+updateCalendarHeader();
 
 
+  // ======= Import events functionality =======
+  const importTextarea = document.getElementById('events-import-textarea');
+  const importBtn = document.getElementById('import-events-btn');
 
-    <!-- Image Divider with Parallax -->
-    <section class="parallax-image" style="background-image: url('BURBGER.jpg');"></section>
+  importBtn.addEventListener('click', () => {
+    const lines = importTextarea.value.trim().split('\n');
+    let importedCount = 0;
+    for (const line of lines) {
+      if (!line.trim()) continue;
+      try {
+        const obj = JSON.parse(line);
+        if (obj.date && obj.text) {
+          // Validate date format YYYY-MM-DD
+          if (/^\d{4}-\d{2}-\d{2}$/.test(obj.date)) {
+            addEvent(obj.date, obj.text);
+            importedCount++;
+          } else {
+            alert(`Invalid date format: ${obj.date}`);
+            return;
+          }
+        } else {
+          alert('Each event must have "date" and "text" fields.');
+          return;
+        }
+      } catch {
+        alert('Invalid JSON line:\n' + line);
+        return;
+      }
+    }
+    alert(`Successfully imported ${importedCount} event(s).`);
+    importTextarea.value = '';
+    renderCalendar(now.getFullYear(), now.getMonth());
+  });
 
-    <!-- Projects Section with Minimalist Style -->
-    <section id="projects" class="content-section">
-        <div class="text-container">
-            <h2>My Projects</h2>
-            <p>Explore my creations, from innovative Roblox game modes to exciting new features.</p>
-        </div>
-    </section>
+  // ======= Pomodoro Timer functionality =======
+  const timerDisplay = document.getElementById('timer-display');
+  const startBtn = document.getElementById('start-timer-btn');
+  const pauseBtn = document.getElementById('pause-timer-btn');
+  const resetBtn = document.getElementById('reset-timer-btn');
 
-    <!-- Another Parallax Image Divider -->
-    <section class="parallax-image" style="background-image: url('TATEMCRAE.png');"></section>
+  let timerDuration = 25 * 60; // 25 minutes in seconds
+  let timerRemaining = timerDuration;
+  let timerInterval = null;
 
-    <!-- Contact Section -->
-    <section id="contact" class="content-section">
-        <div class="text-container">
-            <h2>thanks for visiting!</h2>
-        </div>
-    </section>
+  function updateTimerDisplay() {
+    const minutes = Math.floor(timerRemaining / 60);
+    const seconds = timerRemaining % 60;
+    timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  }
 
-    <script src="script.js"></script>
+  function startTimer() {
+    if (timerInterval) return;
+    startBtn.disabled = true;
+    pauseBtn.disabled = false;
+    resetBtn.disabled = false;
+    timerInterval = setInterval(() => {
+      if (timerRemaining > 0) {
+        timerRemaining--;
+        updateTimerDisplay();
+      } else {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        alert("Time's up! Take a break.");
+        startBtn.disabled = false;
+        pauseBtn.disabled = true;
+      }
+    }, 1000);
+  }
+
+  function pauseTimer() {
+    if (timerInterval) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      startBtn.disabled = false;
+      pauseBtn.disabled = true;
+    }
+  }
+
+  function resetTimer() {
+    pauseTimer();
+    timerRemaining = timerDuration;
+    updateTimerDisplay();
+    resetBtn.disabled = true;
+  }
+
+  startBtn.addEventListener('click', startTimer);
+  pauseBtn.addEventListener('click', pauseTimer);
+  resetBtn.addEventListener('click', resetTimer);
+
+  updateTimerDisplay();
+  resetBtn.disabled = true;
+
+  // ======= Initial calendar render =======
+  renderCalendar(currentYear, currentMonth);
+
+</script>
 </body>
 </html>
